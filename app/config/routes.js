@@ -1,18 +1,26 @@
 import { createStackNavigator } from 'react-navigation'
 
 import PassengerList from '../screens/PassengerList'
+import AddPassengerForm from '../screens/AddPassengerForm'
+
+const navigationOptions = {
+  headerTintColor: 'white',
+  headerBackTitle: null,
+}
 
 export default createStackNavigator(
   {
-    Home: {
+    PassengerList: {
       screen: PassengerList,
-      navigationOptions: {
-        header: () => null,
-        headerTitle: 'Home',
-      },
+      navigationOptions,
+    },
+    AddPassengerForm: {
+      screen: AddPassengerForm,
+      navigationOptions,
     },
   },
   {
     headerMode: 'screen',
+    headerBackTitleVisible: false,
   },
 )

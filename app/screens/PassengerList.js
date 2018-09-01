@@ -1,13 +1,23 @@
 import React from 'react'
-import { Text, StatusBar, View } from 'react-native'
+import {
+  Text, StatusBar, View, Button,
+} from 'react-native'
+import EStyleSheet from 'react-native-extended-stylesheet'
 
-const PassengerList = ({ navigation, dispatch }) => (
-  <View style={{ flex: 1 }}>
-    <StatusBar translucent={false} barStyle="default" />
-    <View style={{ paddingTop: 20 }}>
-      <Text>Passenger List Screen</Text>
-    </View>
-  </View>
-)
+export default class extends React.Component {
+  static navigationOptions = {
+    title: "WHO'S TRAVELLING?",
+    headerStyle: EStyleSheet.create({
+      backgroundColor: () => EStyleSheet.value('$primaryPurple'),
+      borderBottomWidth: 0,
+    }),
+  }
 
-export default PassengerList
+  render() {
+    return (
+      <View>
+        <Button title="Start" onPress={() => this.props.navigation.navigate('AddPassengerForm')} />
+      </View>
+    )
+  }
+}
