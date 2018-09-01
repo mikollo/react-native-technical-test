@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux'
 
-import passengers from './passengers'
+import travellers from './travellers'
+import mainTraveller from './mainTraveller'
 
 export default combineReducers({
-  passengers,
+  travellers,
+  mainTraveller,
 })

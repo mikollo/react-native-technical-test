@@ -1,6 +1,7 @@
 import React from 'react'
 import { Text, View, TouchableOpacity } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
+import { connect } from 'react-redux'
 
 const styles = EStyleSheet.create({
   doneButtonLabel: { color: 'white', marginRight: 9, fontSize: 17 },
@@ -12,9 +13,9 @@ const DoneButton = ({ navigation }) => (
   </TouchableOpacity>
 )
 
-export default class extends React.Component {
+class AddPassengerForm extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: 'ADD TRAVELLER',
+    title: 'ENTER TRAVELLER',
     headerStyle: EStyleSheet.create({
       backgroundColor: () => EStyleSheet.value('$primaryOrange'),
       borderBottomWidth: 0,
@@ -28,10 +29,29 @@ export default class extends React.Component {
   }
 
   onDone = () => {
-    this.props.navigation.goBack()
+    this.props.addTraveller({
+      title: 'Mr',
+      firstName: 'Elvigde',
+      lastName: 'Doxey',
+      dateOfBirth: '1985-01-20',
+      passportId: 'A123132123',
+      nationality: 'GB',
+    })
   }
 
   render() {
     return <View />
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  addTraveller: travellerData => dispatch({
+    type: 'ADD_TRAVELLER',
+    travellerData,
+  }),
+})
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(AddPassengerForm)
