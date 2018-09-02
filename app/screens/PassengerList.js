@@ -1,10 +1,8 @@
 import React from 'react'
-import {
-  Text, Alert, View, Button,
-} from 'react-native'
+import { View } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import { connect } from 'react-redux'
-
+import Traveller from '../components/traveller'
 import fetchMainTravellerData from '../actions/index'
 
 class PassengerList extends React.Component {
@@ -21,34 +19,40 @@ class PassengerList extends React.Component {
     fetchData('https://functionapp20180527095701.azurewebsites.net/api/GetUserTravellerInfo')
   }
 
-  componentDidUpdate(prevProps) {
-    if (
-      prevProps.mainTraveller.status !== this.props.mainTraveller.status
-      && this.props.mainTraveller.status === 'fail'
-    ) {
-      Alert.alert("We couldn't retrieve data")
-    }
-  }
-
   render() {
+    const { travellers, navigation } = this.props
     return (
       <View>
-        <Button title="Start" onPress={() => this.props.navigation.navigate('AddPassengerForm')} />
+        {travellers.mainTraveller && (
+          <Traveller
+            onPress={() => navigation.navigate('AddPassengerForm', {
+              travellerType: 'mainTraveller',
+            })
+            }
+            {...travellers.mainTraveller}
+          />
+        )}
+        {['adult1', 'adult2', 'child1'].map(travellerType => (
+          <Traveller
+            key={travellerType}
+            onPress={() => navigation.navigate('AddPassengerForm', {
+              travellerType,
+            })
+            }
+            travellerType={travellerType}
+            {...travellers[travellerType]}
+          />
+        ))}
       </View>
     )
   }
 }
-
-const mapStateToProps = state => ({
-  mainTraveller: state.mainTraveller,
-  travellers: state.travellers,
-})
 
 const mapDispatchToProps = dispatch => ({
   fetchData: url => dispatch(fetchMainTravellerData(url)),
 })
 
 export default connect(
-  mapStateToProps,
+  state => state,
   mapDispatchToProps,
 )(PassengerList)

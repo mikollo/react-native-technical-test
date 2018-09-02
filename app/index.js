@@ -7,13 +7,15 @@ import Navigator from './config/routes'
 import store from './config/store'
 
 EStyleSheet.build({
-  $primaryBlue: '#4F6D7A',
-  $primaryOrange: '#D57A66',
-  $primaryGreen: '#00BD9D',
-  $primaryPurple: '#9E768F',
-  $white: '#FFFFFF',
+  $primaryOrange: 'rgb(252,80,80)',
+  $primaryPurple: 'rgb(91,101,210)',
   $lightGray: '#F0F0F0',
   $darkText: '#343434',
+  $dogeYellow: 'rgb(208,172,93)',
+  $defaultPadding: 16,
+  $defaultPaddingHalf: 8,
+  $defaultFontSize: 16,
+  $defaultFontWeight: '500',
 })
 
 export default () => (
